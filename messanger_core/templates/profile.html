@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+    <header class="profile-header">
+        <div class="logo">MyApp</div>
+        <nav class="navbar">
+            <a href="index.html">Home</a>
+            <a href="friends.html">Friends</a>
+            <a href="settings.html">Settings</a>
+            <a href="profile_static.html" class="active">Profile</a>
+            <button class="logout-btn">Logout</button>
+        </nav>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-card">
+            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
+            <h2 class="username">John Doe</h2>
+            <p class="bio">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam at sem eu metus tristique tempus.</p>
+            <button class="edit-profile-btn">Edit Profile</button>
+        </div>
+
+        <div class="profile-details">
+            <h3>Details</h3>
+            <p><strong>Email:</strong> johndoe@example.com</p>
+            <p><strong>Location:</strong> New York, USA</p>
+            <p><strong>Joined:</strong> January 2021</p>
+        </div>
+    </div>
+</body>
+</html>
