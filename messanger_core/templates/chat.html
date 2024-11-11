@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="chat-app">
+        <!-- Список друзей -->
+        <div class="friends-list">
+            <h3>Friends</h3>
+            <ul id="friends">
+                <li onclick="openChat('John Doe')" class="active">John Doe</li>
+                <li onclick="openChat('Jane Smith')">Jane Smith</li>
+                <li onclick="openChat('Mike Johnson')">Mike Johnson</li>
+            </ul>
+        </div>
+
+        <!-- Окно чата -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2 id="chat-title">Chat with John Doe</h2>
+            </div>
+            <div class="chat-box" id="chat-box">
+                <!-- Примеры сообщений -->
+                <div class="message received">
+                    <span class="message-text">Hello! How are you?</span>
+                    <span class="message-time">10:15 AM</span>
+                </div>
+                <div class="message sent">
+                    <span class="message-text">I'm good, thanks! How about you?</span>
+                    <span class="message-time">10:17 AM</span>
+                </div>
+                <div class="message received">
+                    <span class="message-text">Doing well, just catching up with work.</span>
+                    <span class="message-time">10:20 AM</span>
+                </div>
+            </div>
+            <div class="message-input">
+                <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

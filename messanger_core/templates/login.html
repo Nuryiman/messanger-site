@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body>
+    <div class="auth-container">
+        <h1>Вход</h1>
+        <form action="{% url 'make-login-url' %}" method="POST">
+            {% csrf_token %}
+            <label for="phone">Электронная почта</label>
+            <input type="text" id="phone" name="phone" placeholder="Введите ваш телефон номер" required>
+
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" placeholder="Введите ваш пароль" required>
+
+            <button type="submit">Войти</button>
+            {% if error %}
+                <div>
+                    <p style="color: red">{{ error }}</p>
+                </div>
+            {% endif %}
+            <p class="switch-auth">Нет аккаунта? <a href="#">Зарегистрируйтесь</a>.</p>
+        </form>
+    </div>
+</body>
+</html>

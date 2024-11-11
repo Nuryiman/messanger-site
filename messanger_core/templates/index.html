@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Friends List</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <form action="{% url 'make-logout-url' %}" method="POST" class="logout-form">
+                {% csrf_token %}
+                <button type="submit">Выйти</button>
+    </form>
+    <div class="main-container">
+        <div class="header">
+            <h1>My Friends</h1>
+            <input type="text" id="search-input" placeholder="Search friends..." onkeyup="searchFriends()">
+
+            <button id="add-friend-btn">Add Friend</button>
+        </div>
+
+        <div class="friends-list">
+            <ul id="friends">
+                <li class="friend">
+                    <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
+                    <span>John Doe</span>
+                    <div class="status online"></div>
+                </li>
+                <li class="friend">
+                    <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
+                    <span>Jane Smith</span>
+                    <div class="status away"></div>
+                </li>
+                <li class="friend">
+                    <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
+                    <span>Mike Johnson</span>
+                    <div class="status offline"></div>
+                </li>
+                <li class="friend">
+                    <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
+                    <span>Emily Clark</span>
+                    <div class="status online"></div>
+                </li>
+                <li class="friend">
+                    <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
+                    <span>Daniel Lee</span>
+                    <div class="status away"></div>
+                </li>
+                <li class="friend">
+                    <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
+                    <span>Sarah Adams</span>
+                    <div class="status offline"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="add-friend-popup" class="popup">
+        <div class="popup-content">
+            <h2>Add Friend</h2>
+            <input type="text" id="new-friend-name" placeholder="Enter friend's name">
+            <button id="save-friend">Save</button>
+            <button id="cancel-add">Cancel</button>
+        </div>
+    </div>
+
+    <script src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
