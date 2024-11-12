@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Изменить профиль</title>
+    <link rel="stylesheet" href="{% static 'css/edit_profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="profile-container">
+        <h2 class="edit-profile-title">Редактировать профиль</h2>
+
+        <form action="{% url 'make-edit-profile-url' %}" method="POST" enctype="multipart/form-data" class="edit-profile-form">
+            {% csrf_token %}
+
+            <!-- Фото профиля -->
+            <div class="form-group">
+                <label for="profile-pic">Фото профиля</label>
+                <input type="file" id="profile-pic" name="profile_pic" accept="image/*" class="file-input">
+            </div>
+
+            <!-- Имя -->
+            <div class="form-group">
+                <label for="name">Имя</label>
+                <input type="text" id="name" name="name" value="{{ user.first_name }}" class="form-input">
+            </div>
+
+            <!-- Номер телефона -->
+            <div class="form-group">
+                <label for="phone">Номер телефона</label>
+                <input type="text" id="phone" name="phone" value="{{ user.phone_number }}" class="form-input">
+            </div>
+
+            <!-- Дата рождения -->
+            <div class="form-group">
+                <label for="birth_day">Дата рождения</label>
+                <input type="date" id="birth_day" name="birth_day" value="{{ user.birth_day }}" class="form-input">
+            </div>
+
+            <!-- Биография с ограничением на 200 символов -->
+            <div class="form-group">
+                <label for="bio">Биография</label>
+                <textarea id="bio" name="bio" class="form-textarea" maxlength="200">{% if user.bio %}{{ user.bio }}{% endif %}</textarea>
+                <small class="char-count">Максимум 200 символов</small>
+            </div>
+
+            <!-- Кнопки для сохранения и отмены -->
+            <div class="form-actions">
+                <button type="submit" class="save-btn">Сохранить</button>
+                <a href="{% url 'profile-url' %}" class="cancel-btn">Отменить</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

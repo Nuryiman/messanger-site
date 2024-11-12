@@ -1,0 +1,29 @@
+{% load static %}
+<header class="header">
+    <div class="container">
+        <!-- Логотип -->
+        <div class="logo">
+            <a href="/">
+                <img src="https://media.istockphoto.com/id/1313644269/vector/gold-and-silver-circle-star-logo-template.jpg?s=612x612&w=0&k=20&c=hDqCI9qTkNqNcKa6XS7aBim7xKz8cZbnm80Z_xiU2DI=" alt="Logo" class="logo-img">
+            </a>
+        </div>
+
+        <!-- Навигация -->
+        <nav class="nav">
+            <a href="{% url 'home-url' %}" class="nav-item">Главная</a>
+            <a href="{% url 'profile-url' %}" class="nav-item">Профиль</a>
+            <a href="" class="nav-item">Друзья</a>
+            <a href="" class="nav-item">Настройки</a>
+            <!-- Кнопка уведомлений -->
+            <a href="" class="nav-item notifications-btn">
+                <span class="notifications-icon">🔔</span>
+                Уведомления
+            </a>
+        </nav>
+
+        <!-- Кнопка выхода -->
+        <div class="logout-btn-container">
+            <a href="/logout" class="logout-btn">Выйти</a>
+        </div>
+    </div>
+</header>

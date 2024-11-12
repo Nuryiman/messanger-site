@@ -19,6 +19,9 @@ class CustomUser(AbstractUser):
     birth_day = models.DateField(
         null=True,
         blank=True)
+    avatar = models.ImageField(upload_to='avatars/', null=True)
+
+    bio = models.CharField(max_length=200, null=True)
 
     objects = CustomUserManager()
 

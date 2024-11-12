@@ -1,3 +1,4 @@
+/* Общие стили */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,15 +7,17 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f7fa;
-    color: #2d3436;
+    background-color: #2d3436; /* Темный фон */
+    color: #ecf0f1; /* Светлый текст */
+    line-height: 1.6;
 }
 
+/* Хедер профиля */
 .profile-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #0984e3;
+    background-color: #0984e3; /* Яркая синяя для хедера */
     padding: 10px 20px;
     color: white;
 }
@@ -39,12 +42,13 @@ body {
 
 .navbar a:hover,
 .navbar .active {
-    color: #74b9ff;
+    color: #74b9ff; /* Светло-синий при наведении */
 }
 
+/* Кнопка выхода */
 .logout-btn {
     padding: 8px 16px;
-    background-color: #e74c3c;
+    background-color: #e74c3c; /* Красная кнопка */
     color: white;
     border: none;
     border-radius: 4px;
@@ -53,19 +57,21 @@ body {
 }
 
 .logout-btn:hover {
-    background-color: #c0392b;
+    background-color: #c0392b; /* Темный красный при наведении */
 }
 
+/* Контейнер профиля */
 .profile-container {
     max-width: 800px;
     margin: 40px auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: #34495e; /* Темный фон для карточки профиля */
     border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     text-align: center;
 }
 
+/* Карточка профиля */
 .profile-card {
     margin-bottom: 20px;
 }
@@ -75,19 +81,24 @@ body {
     height: 150px;
     border-radius: 50%;
     margin-bottom: 10px;
+    object-fit: cover;
+    border: 4px solid #0984e3; /* Синяя обводка для изображения */
 }
 
+/* Имя пользователя */
 .username {
     font-size: 1.8rem;
-    color: #2d3436;
+    color: #ecf0f1; /* Белый цвет для имени */
 }
 
+/* Описание профиля */
 .bio {
     font-size: 1rem;
-    color: #636e72;
+    color: #b2bec3; /* Сероватый цвет для текста */
     margin-bottom: 20px;
 }
 
+/* Кнопка редактирования профиля */
 .edit-profile-btn {
     padding: 10px 20px;
     background-color: #0984e3;
@@ -99,9 +110,10 @@ body {
 }
 
 .edit-profile-btn:hover {
-    background-color: #74b9ff;
+    background-color: #74b9ff; /* Светло-синий при наведении */
 }
 
+/* Подробности профиля */
 .profile-details {
     text-align: left;
     margin-top: 20px;
@@ -109,6 +121,39 @@ body {
 
 .profile-details h3 {
     font-size: 1.5rem;
-    color: #2d3436;
+    color: #ecf0f1; /* Белый цвет для заголовков */
     margin-bottom: 10px;
+}
+
+.profile-details p {
+    font-size: 1rem;
+    color: #b2bec3; /* Светло-серый для текста */
+}
+
+/* Плавные эффекты при наведении */
+.profile-container:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Плавная тень */
+    transform: translateY(-5px);
+}
+
+.edit-profile-btn:hover,
+.logout-btn:hover {
+    transform: translateY(-3px); /* Подъем кнопок при наведении */
+}
+
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .profile-container {
+        padding: 15px;
+    }
 }

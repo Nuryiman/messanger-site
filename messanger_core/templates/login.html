@@ -6,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход</title>
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
 </head>
 <body>
+    {% include 'header.html' %}
     <div class="auth-container">
         <h1>Вход</h1>
         <form action="{% url 'make-login-url' %}" method="POST">

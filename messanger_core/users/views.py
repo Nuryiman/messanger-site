@@ -103,3 +103,27 @@ class HomeView(TemplateView):
 
 class ProfileView(TemplateView):
     template_name = 'profile.html'
+
+
+class EditProfileView(TemplateView):
+    template_name = 'edit_profile.html'
+
+
+class MakeEditProfileView(View):
+    def post(self, request, *args, **kwargs):
+        data = request.POST
+        user = request.user
+
+        name = data['name']
+        phone = data['phone']
+        birth_day = data['birth_day']
+        bio = data['bio']
+
+        user.first_name = name
+        user.phone_number = phone
+        if birth_day:
+            user.birth_day = birth_day
+        user.bio = bio
+        user.save()
+        return redirect('profile-url')
+

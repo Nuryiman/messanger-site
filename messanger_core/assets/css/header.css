@@ -1,0 +1,96 @@
+/* Общие стили для хедера */
+.header {
+    background-color: #2d3436; /* Темный фон для хедера */
+    color: #ecf0f1; /* Светлый текст для темной темы */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #ecf0f1; /* Светлый текст для темной темы */
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+/* При наведении меняем цвет ссылок в навигации */
+.nav-item:hover {
+    color: #0984e3; /* Синий при наведении */
+}
+
+/* Стили для кнопки уведомлений */
+.notifications-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: #ecf0f1;
+    font-size: 1.1rem;
+    position: relative;
+}
+
+.notifications-btn:hover {
+    color: #0984e3;
+}
+
+.notifications-btn::after {
+    content: "!";
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Стили для кнопки выхода */
+.logout-btn-container {
+    margin-left: 20px;
+}
+
+.logout-btn {
+    padding: 8px 16px;
+    background-color: #e74c3c;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #c0392b;
+}
