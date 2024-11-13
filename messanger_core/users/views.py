@@ -87,18 +87,38 @@ class MakeLogoutView(View):
 class HomeView(TemplateView):
     template_name = 'index.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Получаем текущего пользователя и передаем в контекст
+        user = self.request.user
+        context['user'] = user
+
+        # Поиск пользователей по запросу
+        input_query = self.request.GET.get("search", "")
+        print(input_query)
+
+        if input_query:
+            # Используйте кастомный метод поиска, если он есть
+            search_users = CustomUser.objects.search(name=input_query)
+        else:
+            # Если ничего не введено в поиск, возвращаем всех пользователей
+            search_users = CustomUser.objects.all()
+
+        print(search_users)
+        context['search_users'] = search_users
+        context['input_query'] = input_query
+
+        return context
+
     def get(self, request, *args, **kwargs):
         user = request.user
-        if user.is_authenticated:
-            context = {
-                'user': user
-            }
-            return render(request, 'index.html', context)
-        else:
+        if not user.is_authenticated:
             return redirect('login-url')
 
-    # def get_context_data(self, **kwargs):
-    #     user = self.request.user
+        return super().get(request, *args, **kwargs)
+
+
 
 
 class ProfileView(TemplateView):
@@ -127,3 +147,6 @@ class MakeEditProfileView(View):
         user.save()
         return redirect('profile-url')
 
+
+class ChatView(TemplateView):
+    template_name = 'chat.html'

@@ -4,15 +4,24 @@
     color: #ecf0f1; /* Светлый текст для темной темы */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s, color 0.3s;
+    position: fixed; /* Фиксируем хедер сверху */
+    top: 0; /* Располагаем его сверху */
+    left: 0; /* Располагаем его слева */
+    width: 100%; /* Хедер будет растягиваться по ширине страницы */
+    z-index: 1000; /* Убедимся, что хедер будет выше остального контента */
+    padding: 10px 20px; /* Отступы внутри хедера */
 }
 
+/* Стили для контейнера логотипа и навигации */
 .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    width: 100%; /* Для корректного выравнивания */
+    box-sizing: border-box; /* Чтобы padding не увеличивал размеры контейнера */
 }
 
+/* Логотип */
 .logo {
     display: flex;
     align-items: center;
@@ -23,12 +32,7 @@
     height: 40px;
 }
 
-.logo-text {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-left: 10px;
-}
-
+/* Навигация */
 .nav {
     display: flex;
     gap: 20px;
@@ -77,7 +81,7 @@
     align-items: center;
 }
 
-/* Стили для кнопки выхода */
+/* Кнопка выхода */
 .logout-btn-container {
     margin-left: 20px;
 }

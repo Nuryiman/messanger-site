@@ -10,6 +10,7 @@ body {
     background-color: #2d3436; /* Темный фон */
     color: #ecf0f1; /* Светлый текст */
     line-height: 1.6;
+    padding-top: 20px;
 }
 
 /* Хедер профиля */
@@ -68,6 +69,7 @@ body {
     background-color: #34495e; /* Темный фон для контейнера */
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 50;
     text-align: center;
 }
 

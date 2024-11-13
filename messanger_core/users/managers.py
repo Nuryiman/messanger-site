@@ -15,3 +15,7 @@ class CustomUserManager(BaseUserManager):
         extra_fields['is_superuser'] = True
         extra_fields['is_active'] = True
         return self.create_user(phone_number, password, **extra_fields)
+
+    def search(self, name):
+        return self.filter(first_name__icontains=name)
+

@@ -37,3 +37,6 @@ class UserMessage(models.Model):
     receiver = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='receiver_messages')
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+
+
+# class Chat()
