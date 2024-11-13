@@ -15,7 +15,7 @@
         <div class="div-header">
             <h1>My Friends</h1>
             <form action="?search_friend={{ request.GET.query }}" method="GET">
-                <input name="search" type="text" id="search-input" placeholder="Search friends..." onkeyup="searchFriends()">
+                <input name="search" type="text" id="search-input" value="{{ input_query }}" placeholder="Search friends..." onkeyup="searchFriends()">
                 <button id="add-friend-btn" type="submit">Add Friend</button>
             </form>
         </div>
@@ -30,8 +30,6 @@
                             <div class="status online"></div>
                         </li>
                     {% endfor %}
-                {% else %}
-
                 {% endif %}
             </ul>
         </div>
