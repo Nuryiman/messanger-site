@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from users.models import CustomUser
+from users.models import CustomUser, Chat, UserMessage
 
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    list_display = ['phone_number',]
+    list_display = ['phone_number', 'first_name']
     ordering = ['phone_number',]
 
     search_fields = ("first_name", "last_name", "phone_number")
@@ -36,4 +36,14 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
+
+
+@admin.register(Chat)
+class ChatAdmin(admin.ModelAdmin):
+    list_display = ['id', 'user1', 'user2']
+
+
+@admin.register(UserMessage)
+class UserMessageAdmin(admin.ModelAdmin):
+    list_display = ['id', 'sender', 'receiver', 'text']
 

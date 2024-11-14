@@ -15,38 +15,44 @@
         <div class="friends-list">
             <h3>Friends</h3>
             <ul id="friends">
-                <li onclick="openChat('John Doe')" class="active">John Doe</li>
-                <li onclick="openChat('Jane Smith')">Jane Smith</li>
-                <li onclick="openChat('Mike Johnson')">Mike Johnson</li>
+                {% for item in chats %}
+                    {% if item.user1 == user %}
+                        <li onclick="openChat('{{ item.user2.first_name }}')" class="active">{{ item.user2.first_name }}</li>
+                    {% else %}
+                        <li onclick="openChat('{{ item.user1.first_name }}')" class="active">{{ item.user1.first_name }}</li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </div>
 
         <!-- Окно чата -->
         <div class="chat-container">
             <div class="chat-header">
-                <h2 id="chat-title">Chat with John Doe</h2>
+                <h2 id="chat-title">
+                    {% if chat.user1 == user %}
+                        {{ chat.user2.first_name }}
+                    {% else %}
+                        {{ chat.user1.first_name }}
+                    {% endif %}
+                </h2>
             </div>
             <div class="chat-box" id="chat-box">
+                {% for item in chat_messages %}
                 <!-- Примеры сообщений -->
-                <div class="message received">
-                    <span class="message-text">Hello! How are you?</span>
-                    <span class="message-time">10:15 AM</span>
-                </div>
-                <div class="message sent">
-                    <span class="message-text">I'm good, thanks! How about you?</span>
-                    <span class="message-time">10:17 AM</span>
-                </div>
-                <div class="message received">
-                    <span class="message-text">Doing well, just catching up with work.</span>
-                    <span class="message-time">10:20 AM</span>
-                </div>
+                    <div class="message {% if item.sender == user %} sent {% else %} received {% endif %}">
+                        <span class="message-text">{{ item.text }}</span>
+                        <span class="message-time">{{ item.created_at|date:"H:i" }}</span>
+                    </div>
+                {% endfor %}
             </div>
             <div class="message-input">
-                <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
-                <button onclick="sendMessage()">Send</button>
+                <form action="{% url 'send-message' companion.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" id="message-input" name="message" placeholder="Type a message..." autocomplete="off">
+                    <button type="submit">Send</button>
+                </form>
             </div>
         </div>
     </div>
-    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>

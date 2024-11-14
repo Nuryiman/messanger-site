@@ -26,7 +26,7 @@
                     <p style="color: red">{{ error }}</p>
                 </div>
             {% endif %}
-            <p class="switch-auth">Нет аккаунта? <a href="#">Зарегистрируйтесь</a>.</p>
+            <p class="switch-auth">Нет аккаунта? <a href="{% url 'register-url' %}">Зарегистрируйтесь</a>.</p>
         </form>
     </div>
 </body>

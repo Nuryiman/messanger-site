@@ -22,13 +22,37 @@
 
         <div class="friends-list">
             <ul id="friends">
-                {% if search_users %}
-                    {% for item in search_users %}
-                        <li class="friend">
-                            <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
-                            <span>{{ item.first_name }}</span>
-                            <div class="status online"></div>
-                        </li>
+                {% if input_query %}
+                    {% for item in users %}
+                        <a href="{% url 'chat-url' item.id %}">
+                            <li class="friend">
+                                <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
+                                <span>
+                                    {% if item.user1 == user %}
+                                        {{ item.user2.first_name }}
+                                    {% else %}
+                                        {{ item.user1.first_name }}
+                                    [{% endif %}
+                                </span>
+                                <div class="status offline"></div>
+                            </li>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    {% for item in users %}
+                        <a href="{% url 'chat-url' item.id %}">
+                            <li class="friend">
+                                <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
+                                <span>
+                                    {% if item.user1 == user %}
+                                        {{ item.user2.first_name }}
+                                    {% else %}
+                                        {{ item.user1.first_name }}
+                                    {% endif %}
+                                </span>
+                                <div class="status offline"></div>
+                            </li>
+                        </a>
                     {% endfor %}
                 {% endif %}
             </ul>
