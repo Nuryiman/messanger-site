@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
-from users.views import (LoginView, RegisterView, MakeRegisterView, EditProfileView,
+from users.views import (LoginView, RegisterView, MakeRegisterView, EditProfileView, SendMessageView,
                          MakeLoginView, HomeView, MakeLogoutView, ProfileView, MakeEditProfileView, ChatView)
 
 urlpatterns = [
@@ -32,7 +32,8 @@ urlpatterns = [
     path('profile/', ProfileView.as_view(), name='profile-url'),
     path('edit-profile/', EditProfileView.as_view(), name='edit-profile-url'),
     path('make-edit-profile/', MakeEditProfileView.as_view(), name='make-edit-profile-url'),
-    path('chat/', ChatView.as_view())
+    path('chat/<int:pk>', ChatView.as_view(), name='chat-url'),
+    path('send-message/<int:pk>', SendMessageView.as_view(), name='send-message')
 ]
 
 if settings.DEBUG:

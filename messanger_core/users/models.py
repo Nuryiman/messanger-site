@@ -30,6 +30,16 @@ class CustomUser(AbstractUser):
         verbose_name_plural = "Пользователи"
 
 
+class Chat(models.Model):
+    """Моделька для чатов"""
+
+    user1 = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user1_chats', null=True)
+    user2 = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='user2_chats', null=True)
+
+    class Meta:
+        unique_together = ('user1', 'user2')
+
+
 class UserMessage(models.Model):
     """Моделька для сообщений пользователей"""
 
@@ -37,6 +47,4 @@ class UserMessage(models.Model):
     receiver = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='receiver_messages')
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-
-
-# class Chat()
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='messages', null=True)

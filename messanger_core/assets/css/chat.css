@@ -12,6 +12,7 @@ body {
     align-items: center;
     height: 100vh;
     overflow: hidden;
+    padding-top: 30px;
 }
 
 .chat-app {
@@ -71,6 +72,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    margin-top: 10px;
     background-color: #ffffff;
 }
 

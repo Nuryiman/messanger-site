@@ -30,7 +30,7 @@
                     <p style="color: red">{{ error }}</p>
                 </div>
             {% endif %}
-            <p class="switch-auth">Уже есть аккаунт? <a href="login.html">Войдите</a>.</p>
+            <p class="switch-auth">Уже есть аккаунт? <a href="{% url 'login-url' %}">Войдите</a>.</p>
         </form>
     </div>
 </body>

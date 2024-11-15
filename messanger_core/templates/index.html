@@ -22,17 +22,42 @@
 
         <div class="friends-list">
             <ul id="friends">
-                {% if search_users %}
-                    {% for item in search_users %}
-                        <li class="friend">
-                        {% if item.avatar %}
-                            <img src="{{ item.avatar.url }}" alt="Profile Picture" width="20%" height="100px" style="object-fit: contain;" class="profile-pici">
-                         {% else %}
-                               <img src="https://via.placeholder.com/150" alt="Profile Picture" width="20%" height="100px" style="object-fit: contain;" class="profile-pici">
-                        {% endif %}
-                            <span>{{ item.first_name }}</span>
-                            <div class="status online"></div>
-                        </li>
+<<<<<<< HEAD
+                {% if input_query %}
+                    {% for item in users %}
+                        <a href="{% url 'chat-url' item.id %}">
+                            <li class="friend">
+                                <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
+                                <span>
+                                    {% if item.user1 == user %}
+                                        {{ item.user2.first_name }}
+                                    {% else %}
+                                        {{ item.user1.first_name }}
+                                    [{% endif %}
+                                </span>
+                                <div class="status offline"></div>
+                            </li>
+                        </a>
+                    {% endfor %}
+                {% else %}
+                    {% for item in users %}
+                        <a href="{% url 'chat-url' item.id %}">
+                            <li class="friend">
+                                {% if item.avatar %}
+                                    <img src="{{ item.avatar.url }}" alt="Profile Picture" width="20%" height="100px" style="object-fit: contain;" class="profile-pici">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/150" alt="Profile Picture" width="20%" height="100px" style="object-fit: contain;" class="profile-pici">
+                                {% endif %}
+                                <span>
+                                    {% if item.user1 == user %}
+                                        {{ item.user2.first_name }}
+                                    {% else %}
+                                        {{ item.user1.first_name }}
+                                    {% endif %}
+                                </span>
+                                <div class="status offline"></div>
+                            </li>
+                        </a>
                     {% endfor %}
                 {% endif %}
             </ul>

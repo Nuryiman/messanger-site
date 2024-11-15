@@ -1,10 +1,11 @@
 from django.contrib.auth import login, logout
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
 from .forms import ProfileImage
 
-from users.models import CustomUser
+from users.models import CustomUser, Chat, UserMessage
 
 
 class RegisterView(TemplateView):
@@ -78,7 +79,7 @@ class MakeLoginView(View):
 
 class MakeLogoutView(View):
 
-    def post(self, request, *args, **kwargs):
+    def get(self, request, *args, **kwargs):
 
         logout(request)
 
@@ -93,23 +94,20 @@ class HomeView(TemplateView):
         if not user.is_authenticated:
             return redirect('login-url')
 
-        super().get(request, *args, **kwargs)
         input_query = request.GET.get("search", "")
         if input_query:
-            search_users = CustomUser.objects.search(name=input_query)
+            users = CustomUser.objects.search(name=input_query).exclude(id=user.id)
         else:
-            search_users = CustomUser.objects.all()
+            users = Chat.objects.filter(Q(user1=user) | Q(user2=user)).exclude(id=user.id)
 
         context = {
 
             'user': user,
-            'search_users': search_users,
+            'users': users,
             'input_query': input_query
 
         }
         return render(request, self.template_name, context)
-
-
 
 
 class ProfileView(TemplateView):
@@ -142,5 +140,50 @@ class MakeEditProfileView(View):
             return redirect('profile-url')
 
 
-class ChatView(TemplateView):
+class ChatView(View):
     template_name = 'chat.html'
+
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+
+        chats = Chat.objects.filter(Q(user1=user) | Q(user2=user))
+        chat = Chat.objects.get(id=kwargs['pk'])
+        if chat.user1 == user:
+            companion = chat.user2
+        else:
+            companion = chat.user1
+
+        chat_messages = UserMessage.objects.filter(Q(sender=user, receiver=companion) |
+                                               Q(receiver=user, sender=companion)).order_by('created_at')
+
+        context = {
+            'chat': chat,
+            'user': user,
+            'companion': companion,
+            'chats': chats,
+            'chat_messages': chat_messages,
+        }
+        return render(request, self.template_name, context)
+
+
+class SendMessageView(View):
+    def post(self, request, *args, **kwargs):
+        user = request.user
+
+        companion = CustomUser.objects.get(id=kwargs['pk'])
+        try:
+            chat = Chat.objects.get(user1=user, user2=companion)
+        except Chat.DoesNotExist:
+            try:
+                chat = Chat.objects.get(user2=user, user1=companion)
+            except Chat.DoesNotExist:
+                chat = Chat.objects.create(user1=user, user2=companion)
+
+        message = request.POST['message']
+        UserMessage.objects.create(
+            sender=user,
+            receiver=companion,
+            text=message,
+            chat=chat
+        )
+        return redirect('chat-url', pk=chat.id)
