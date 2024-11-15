@@ -12,7 +12,11 @@
     {% include 'header.html' %}
     <div class="profile-container">
         <div class="profile-card">
-            <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
+            {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="Profile Picture" class="profile-pic">
+            {% else %}
+                 <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-pic">
+            {% endif %}
             <h2 class="username">{{ user.first_name }}</h2>
             <p class="bio">{% if user.bio %}{{ user.bio }}{% endif %}</p>
             <a href="{% url 'edit-profile-url' %}"><button class="edit-profile-btn">Edit Profile</button></a>
