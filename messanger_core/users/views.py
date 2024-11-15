@@ -136,10 +136,10 @@ class MakeEditProfileView(View):
         return redirect('profile-url')
 
 
-class ChatView(TemplateView):
+class ChatView(View):
     template_name = 'chat.html'
 
-    def get_context_data(self, **kwargs):
+    def get(self, request, *args, **kwargs):
         user = self.request.user
 
         chats = Chat.objects.filter(Q(user1=user) | Q(user2=user))
@@ -148,6 +148,7 @@ class ChatView(TemplateView):
             companion = chat.user2
         else:
             companion = chat.user1
+
         chat_messages = UserMessage.objects.filter(Q(sender=user, receiver=companion) |
                                                Q(receiver=user, sender=companion)).order_by('created_at')
 
@@ -158,7 +159,7 @@ class ChatView(TemplateView):
             'chats': chats,
             'chat_messages': chat_messages,
         }
-        return context
+        return render(request, self.template_name, context)
 
 
 class SendMessageView(View):

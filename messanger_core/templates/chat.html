@@ -17,9 +17,9 @@
             <ul id="friends">
                 {% for item in chats %}
                     {% if item.user1 == user %}
-                        <li onclick="openChat('{{ item.user2.first_name }}')" class="active">{{ item.user2.first_name }}</li>
+                        <a href="{% url 'chat-url' item.id %}"><li class="active">{{ item.user2.first_name }}</li></a>
                     {% else %}
-                        <li onclick="openChat('{{ item.user1.first_name }}')" class="active">{{ item.user1.first_name }}</li>
+                        <a href="{% url 'chat-url' item.id %}"><li class="active">{{ item.user1.first_name }}</li></a>
                     {% endif %}
                 {% endfor %}
             </ul>
