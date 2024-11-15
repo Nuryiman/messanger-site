@@ -18,8 +18,15 @@
 
             <!-- Фото профиля -->
             <div class="form-group">
-                <label for="profile-pic">Фото профиля</label>
-                <input type="file" id="profile-pic" name="profile_pic" accept="image/*" class="file-input">
+                <p>
+                    <label for="id_profile_image">Profile image:</label>
+                    <input type="file" name="profile_image" id="id_profile_image">
+                </p>
+
+                <!-- Отображаем текущее изображение профиля, если оно существует -->
+                {% if user.profile_image %}
+                    <img src="{{ user.avatar.url }}" alt="Profile Image" style="max-width: 150px; max-height: 150px;">
+                {% endif %}
             </div>
 
             <!-- Имя -->

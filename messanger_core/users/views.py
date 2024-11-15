@@ -3,6 +3,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import TemplateView
+from .forms import ProfileImage
 
 from users.models import CustomUser, Chat, UserMessage
 
@@ -119,21 +120,24 @@ class EditProfileView(TemplateView):
 
 class MakeEditProfileView(View):
     def post(self, request, *args, **kwargs):
-        data = request.POST
-        user = request.user
+            data = request.POST
+            user = request.user
 
-        name = data['name']
-        phone = data['phone']
-        birth_day = data['birth_day']
-        bio = data['bio']
+            name = data['name']
+            phone = data['phone']
+            birth_day = data.get('birth_day')
+            bio = data['bio']
+            avatar = request.FILES.get('profile_image')  # Получаем загружаемое изображение
 
-        user.first_name = name
-        user.phone_number = phone
-        if birth_day:
-            user.birth_day = birth_day
-        user.bio = bio
-        user.save()
-        return redirect('profile-url')
+            user.first_name = name
+            user.phone_number = phone
+            if birth_day:
+                user.birth_day = birth_day
+            user.bio = bio
+            if avatar:
+                user.avatar = avatar  # Сохраняем изображение
+            user.save()
+            return redirect('profile-url')
 
 
 class ChatView(View):

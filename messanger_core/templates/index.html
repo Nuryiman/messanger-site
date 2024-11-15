@@ -22,6 +22,7 @@
 
         <div class="friends-list">
             <ul id="friends">
+<<<<<<< HEAD
                 {% if input_query %}
                     {% for item in users %}
                         <a href="{% url 'chat-url' item.id %}">
@@ -42,7 +43,11 @@
                     {% for item in users %}
                         <a href="{% url 'chat-url' item.id %}">
                             <li class="friend">
-                                <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
+                                {% if item.avatar %}
+                                    <img src="{{ item.avatar.url }}" alt="Profile Picture" width="20%" height="100px" style="object-fit: contain;" class="profile-pici">
+                                {% else %}
+                                    <img src="https://via.placeholder.com/150" alt="Profile Picture" width="20%" height="100px" style="object-fit: contain;" class="profile-pici">
+                                {% endif %}
                                 <span>
                                     {% if item.user1 == user %}
                                         {{ item.user2.first_name }}
