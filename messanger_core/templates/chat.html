@@ -17,9 +17,13 @@
             <ul id="friends">
                 {% for item in chats %}
                     {% if item.user1 == user %}
-                        <a href="{% url 'chat-url' item.id %}"><li class="active">{{ item.user2.first_name }}</li></a>
+                        <a href="{% url 'chat-url' item.id %}">
+                            <li class="active">{{ item.user2.first_name }}</li>
+                        </a>
                     {% else %}
-                        <a href="{% url 'chat-url' item.id %}"><li class="active">{{ item.user1.first_name }}</li></a>
+                        <a href="{% url 'chat-url' item.id %}">
+                            <li class="active">{{ item.user1.first_name }}</li>
+                        </a>
                     {% endif %}
                 {% endfor %}
             </ul>
@@ -27,6 +31,7 @@
 
         <!-- Окно чата -->
         <div class="chat-container">
+            <!-- Заголовок чата -->
             <div class="chat-header">
                 <h2 id="chat-title">
                     {% if chat.user1 == user %}
@@ -35,16 +40,47 @@
                         {{ chat.user1.first_name }}
                     {% endif %}
                 </h2>
+
+                <!-- Кнопки редактирования и удаления -->
+                <div class="header-actions">
+                    <!-- Форма для удаления сообщений -->
+                    <form id="delete-form" action="{% url 'delete-message' companion.id %}" method="POST" style="display: none;">
+                        {% csrf_token %}
+                        <input type="hidden" name="message_ids" id="message-ids">
+                        <button type="submit" id="delete-button" class="delete-button">Удалить</button>
+                    </form>
+
+                    <!-- Кнопка редактирования -->
+                    <button id="edit-button" class="edit-button" style="display: none;" onclick="editSelectedMessage()">✏️</button>
+                </div>
             </div>
+
+            <!-- Сообщения -->
             <div class="chat-box" id="chat-box">
                 {% for item in chat_messages %}
-                <!-- Примеры сообщений -->
-                    <div class="message {% if item.sender == user %} sent {% else %} received {% endif %}">
+                    <div class="message {% if item.sender == user %} sent {% else %} received {% endif %}"
+                         data-id="{{ item.id }}"
+                         data-sender="{{ item.sender.id }}"
+                         onclick="leftClickSelect(this)"
+                         oncontextmenu="rightClickFirstSelect(event, this)">
                         <span class="message-text">{{ item.text }}</span>
                         <span class="message-time">{{ item.created_at|date:"H:i" }}</span>
                     </div>
                 {% endfor %}
             </div>
+
+            <!-- Форма редактирования сообщения -->
+            <div id="edit-message-container" class="edit-message-container" style="display: none;">
+                <form id="edit-form" action="{% url 'edit-message' companion.id %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="message_id" id="edit-message-id">
+                    <input type="text" name="message" id="edit-message-input" required>
+                    <button type="submit" id="save-edit-button">Редактировать</button>
+                </form>
+            </div>
+
+
+            <!-- Ввод нового сообщения -->
             <div class="message-input">
                 <form action="{% url 'send-message' companion.id %}" method="POST">
                     {% csrf_token %}
@@ -55,4 +91,6 @@
         </div>
     </div>
 </body>
+    <script src="{% static 'js/chat.js' %}" defer></script>
+
 </html>

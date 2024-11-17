@@ -154,7 +154,7 @@ class ChatView(View):
             companion = chat.user1
 
         chat_messages = UserMessage.objects.filter(Q(sender=user, receiver=companion) |
-                                               Q(receiver=user, sender=companion)).order_by('created_at')
+                                               Q(receiver=user, sender=companion), is_active=True).order_by('created_at')
 
         context = {
             'chat': chat,
@@ -187,3 +187,45 @@ class SendMessageView(View):
             chat=chat
         )
         return redirect('chat-url', pk=chat.id)
+
+
+class DeleteMessageView(View):
+    """Вью для удаления сообщений"""
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        print(request.POST)
+
+        message_ids = request.POST['message_ids']
+        for item in message_ids.split(','):
+            message = UserMessage.objects.get(id=item)
+            message.is_active = False
+            message.save()
+        companion = CustomUser.objects.get(id=kwargs['pk'])
+
+        try:
+            chat = Chat.objects.get(user1=user, user2=companion)
+        except Chat.DoesNotExist:
+            chat = Chat.objects.get(user2=user, user1=companion)
+        return redirect('chat-url', pk=chat.pk)
+
+
+class EditMessageView(View):
+    """Вью для редактирования сообщений"""
+
+    def post(self, request, *args, **kwargs):
+        user = request.user
+        print(request.POST)
+
+        text = request.POST['message']
+        message_id = request.POST['message_id']
+        message = UserMessage.objects.get(id=message_id)
+        message.text = text
+        message.save()
+        companion = CustomUser.objects.get(id=kwargs['pk'])
+
+        try:
+            chat = Chat.objects.get(user1=user, user2=companion)
+        except Chat.DoesNotExist:
+            chat = Chat.objects.get(user2=user, user1=companion)
+        return redirect('chat-url', pk=chat.pk)

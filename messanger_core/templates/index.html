@@ -22,7 +22,6 @@
 
         <div class="friends-list">
             <ul id="friends">
-<<<<<<< HEAD
                 {% if input_query %}
                     {% for item in users %}
                         <a href="{% url 'chat-url' item.id %}">
@@ -33,7 +32,7 @@
                                         {{ item.user2.first_name }}
                                     {% else %}
                                         {{ item.user1.first_name }}
-                                    [{% endif %}
+                                    {% endif %}
                                 </span>
                                 <div class="status offline"></div>
                             </li>
