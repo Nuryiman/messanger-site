@@ -20,7 +20,7 @@ from django.contrib import admin
 from django.urls import path
 from users.views import (LoginView, RegisterView, MakeRegisterView, EditProfileView, SendMessageView,
                          MakeLoginView, HomeView, MakeLogoutView, ProfileView, MakeEditProfileView, ChatView,
-                         DeleteMessageView, EditMessageView)
+                         DeleteMessageView, EditMessageView, UserChatView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -36,7 +36,8 @@ urlpatterns = [
     path('chat/<int:pk>', ChatView.as_view(), name='chat-url'),
     path('send-message/<int:pk>', SendMessageView.as_view(), name='send-message'),
     path('delete-message/<int:pk>', DeleteMessageView.as_view(), name='delete-message'),
-    path('edit-message/<int:pk>', EditMessageView.as_view(), name='edit-message')
+    path('edit-message/<int:pk>', EditMessageView.as_view(), name='edit-message'),
+    path('user-chat/<int:pk>', UserChatView.as_view(), name='user-chat-url')
 
 ]
 

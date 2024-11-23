@@ -1,5 +1,6 @@
 from django import forms
-from .models import *
+from .models import CustomUser
+
 
 class ProfileImage(forms.ModelForm):
 

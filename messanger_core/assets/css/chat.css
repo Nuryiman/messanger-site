@@ -7,13 +7,13 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
+    background-color: #121212; /* Темный фон для всего тела */
+    color: #e0e0e0; /* Светлый цвет текста */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     overflow: hidden;
-    margin-top: 40;
 }
 
 /* Основное приложение */
@@ -21,18 +21,18 @@ body {
     display: flex;
     width: 100vw;
     height: 100vh;
-    background-color: #fff;
+    background-color: #2c2f34; /* Темный фон для основного контейнера */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Список друзей */
 .friends-list {
     width: 25%;
-    background-color: #2d3436;
+    background-color: #1f2428; /* Темный фон для списка друзей */
     color: #dfe6e9;
     padding: 20px;
     overflow-y: auto;
-    border-right: 1px solid #dfe6e9;
+    border-right: 1px solid #444;
 }
 
 .friends-list h3 {
@@ -49,7 +49,7 @@ body {
 .friends-list li {
     padding: 15px;
     margin: 5px 0;
-    background-color: #636e72;
+    background-color: #333;
     color: #dfe6e9;
     border-radius: 6px;
     cursor: pointer;
@@ -69,15 +69,16 @@ body {
     display: flex;
     flex-direction: column;
     padding: 20px;
+    margin-top: 20px; /* Смещаем блок чата вниз */
 }
 
 /* Заголовок чата */
 .chat-header {
     text-align: center;
     padding: 15px 0;
-    border-bottom: 1px solid #dfe6e9;
+    border-bottom: 1px solid #444;
     font-size: 1.5rem;
-    color: #2d3436;
+    color: #e0e0e0;
 }
 
 /* Сообщения */
@@ -85,7 +86,7 @@ body {
     flex-grow: 1;
     overflow-y: auto;
     padding: 20px;
-    background-color: #f0f2f5;
+    background-color: #1f2428; /* Темный фон для чата */
     display: flex;
     flex-direction: column;
 }
@@ -99,47 +100,52 @@ body {
     position: relative;
     font-size: 0.9rem;
     cursor: pointer;
+    display: flex;
+    flex-direction: column;
 }
 
 .message.sent {
-    background-color: #74b9ff;
+    background-color: #151513;
     color: white;
     align-self: flex-end;
 }
 
 .message.received {
-    background-color: #dfe6e9;
-    color: #2d3436;
+    background-color: #444;
+    color: #e0e0e0;
     align-self: flex-start;
 }
 
 .message-time {
     font-size: 0.75rem;
-    color: gray;
+    color: #999;
+    align-self: flex-end;
     position: absolute;
     bottom: -18px;
     right: 10px;
 }
 
 .message.selected {
-    background-color: #ffeaa7; /* Цвет выделения */
-    border: 2px solid #d63031; /* Обрамление для выделенных */
+    background-color: #ffeaa7;
+    border: 2px solid #d63031;
 }
 
 /* Ввод сообщения */
 .message-input {
     display: flex;
     padding: 15px;
-    border-top: 1px solid #dfe6e9;
+    border-top: 1px solid #444;
 }
 
 #message-input {
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid #dfe6e9;
+    border: 1px solid #444;
     border-radius: 6px;
     font-size: 1rem;
     outline: none;
+    background-color: #333;
+    color: #e0e0e0;
 }
 
 button {
@@ -213,4 +219,24 @@ button#save-edit-button {
 
 button#save-edit-button:hover {
     background-color: #74b9ff;
+}
+
+/* Галочка для статуса прочтения */
+.read-status {
+    align-self: flex-end;
+    font-size: 1rem;
+    color: #74b9ff;
+    margin-top: 5px;
+}
+
+.read-status i {
+    margin-left: 5px;
+}
+
+.message.sent .read-status i {
+    color: #0984e3;
+}
+
+.message.received .read-status i {
+    color: #e0e0e0; /* Светлый цвет для непрочитанных сообщений */
 }

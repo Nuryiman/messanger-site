@@ -49,3 +49,4 @@ class UserMessage(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='messages', null=True)
     is_active = models.BooleanField(default=True)
+    is_read = models.BooleanField(default=False)

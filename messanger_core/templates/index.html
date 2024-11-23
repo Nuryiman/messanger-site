@@ -24,15 +24,11 @@
             <ul id="friends">
                 {% if input_query %}
                     {% for item in users %}
-                        <a href="{% url 'chat-url' item.id %}">
+                        <a href="{% url 'user-chat-url' item.id %}">
                             <li class="friend">
                                 <img src="https://via.placeholder.com/40" alt="Profile" class="friend-img">
                                 <span>
-                                    {% if item.user1 == user %}
-                                        {{ item.user2.first_name }}
-                                    {% else %}
-                                        {{ item.user1.first_name }}
-                                    {% endif %}
+                                    {{ item.first_name }}
                                 </span>
                                 <div class="status offline"></div>
                             </li>

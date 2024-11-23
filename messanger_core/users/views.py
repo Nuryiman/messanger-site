@@ -156,6 +156,11 @@ class ChatView(View):
         chat_messages = UserMessage.objects.filter(Q(sender=user, receiver=companion) |
                                                Q(receiver=user, sender=companion), is_active=True).order_by('created_at')
 
+        for item in chat_messages:
+            if item.receiver == user:
+                item.is_read = True
+            item.save()
+
         context = {
             'chat': chat,
             'user': user,
@@ -180,6 +185,8 @@ class SendMessageView(View):
                 chat = Chat.objects.create(user1=user, user2=companion)
 
         message = request.POST['message']
+        if message == "":
+            return redirect('chat-url', pk=chat.id)
         UserMessage.objects.create(
             sender=user,
             receiver=companion,
@@ -229,3 +236,22 @@ class EditMessageView(View):
         except Chat.DoesNotExist:
             chat = Chat.objects.get(user2=user, user1=companion)
         return redirect('chat-url', pk=chat.pk)
+
+
+class UserChatView(TemplateView):
+    template_name = 'chat.html'
+
+    def get_context_data(self, *args, **kwargs):
+        user = self.request.user
+
+        companion_id = kwargs['pk']
+
+        companion = CustomUser.objects.get(id=companion_id)
+        chats = Chat.objects.filter(Q(user1=user) | Q(user2=user))
+        
+        context = {
+            'user': user,
+            'companion': companion,
+            'chats': chats
+        }
+        return context

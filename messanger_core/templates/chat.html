@@ -7,6 +7,7 @@
     <title>Chat</title>
     <link rel="stylesheet" href="{% static 'css/chat.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     {% include 'header.html' %}
@@ -65,6 +66,17 @@
                          oncontextmenu="rightClickFirstSelect(event, this)">
                         <span class="message-text">{{ item.text }}</span>
                         <span class="message-time">{{ item.created_at|date:"H:i" }}</span>
+
+                        <!-- Галочки для статуса прочтения -->
+                        {% if item.sender == user %}
+                            <span class="read-status">
+                                {% if item.is_read == True %}
+                                    <i class="fa fa-check-double"></i> <!-- Две галочки для прочитанного -->
+                                {% else %}
+                                    <i class="fa fa-check"></i> <!-- Одна галочка для не прочитанного -->
+                                {% endif %}
+                            </span>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>
@@ -79,18 +91,18 @@
                 </form>
             </div>
 
-
             <!-- Ввод нового сообщения -->
             <div class="message-input">
                 <form action="{% url 'send-message' companion.id %}" method="POST">
                     {% csrf_token %}
-                    <input type="text" id="message-input" name="message" placeholder="Type a message..." autocomplete="off">
+                    <input type="text" id="message-input" name="message" placeholder="Type a message..." autocomplete="off" required>
                     <button type="submit">Send</button>
                 </form>
             </div>
         </div>
     </div>
-</body>
+
     <script src="{% static 'js/chat.js' %}" defer></script>
 
+</body>
 </html>

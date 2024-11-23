@@ -69,3 +69,33 @@ function editSelectedMessage() {
         editMessageContainer.style.display = 'block';
     }
 }
+
+function validateMessage() {
+        var messageInput = document.getElementById('message-input');
+        // Проверяем, что текст не пустой
+        if (messageInput.value.trim() === "") {
+            alert("Please type a message before sending.");
+            return false;  // Отменяет отправку формы
+        }
+        return true;  // Разрешает отправку формы
+    }
+
+// Функция для прокрутки чата в самый низ после загрузки страницы
+window.addEventListener('load', function() {
+    scrollToBottom();
+});
+
+// Функция для прокрутки чата в самый низ
+function scrollToBottom() {
+    const chatBox = document.querySelector('.chat-box');  // Контейнер с сообщениями
+    const lastMessage = chatBox.lastElementChild;  // Последнее сообщение
+
+    if (lastMessage) {
+        lastMessage.scrollIntoView({ behavior: 'smooth', block: 'end' }); // Прокручиваем до последнего сообщения
+    }
+}
+
+// Фокус на поле ввода сообщения при загрузке страницы
+window.addEventListener('load', function() {
+    document.getElementById('message-input').focus();
+});
