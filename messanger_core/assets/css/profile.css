@@ -76,12 +76,12 @@ body {
     margin-bottom: 20px;
 }
 
-
-#profile-pici{
-height: 100px;
-    width: 20%;
-    object-fit: contain;}
-
+.profile-pic {
+    height: 300px;  /* Уменьшение высоты */
+    width: 300px;   /* Уменьшение ширины */
+    object-fit: cover;  /* Чтобы изображение не искажалось, если оно не квадратное */
+    border-radius: 50%;  /* Чтобы сделать аватар круглым */
+}
 
 /* Имя пользователя */
 .username {

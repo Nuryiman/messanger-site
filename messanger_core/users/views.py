@@ -105,7 +105,6 @@ class HomeView(TemplateView):
             'user': user,
             'users': users,
             'input_query': input_query
-
         }
         return render(request, self.template_name, context)
 
